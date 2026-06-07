@@ -1,45 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { Boton } from './components/Boton';
-import { TarjetaPiloto } from './components/TarjetaPiloto';
-import { ListaPiloto } from './components/ListaPilotos';
 import { useState } from 'react';
+import { useRouter } from 'expo-router';
 
 export default function App() {
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState(null)
+    const router = useRouter()
 
+    const irALogin = () => {
+        router.replace("/login")
+    }
 
+    const irAHome = () => {
+        router.push("(tabs)/home")
+    }
+    
 
   return (
     <View style={styles.container}>
 
-      <Text style= {styles.titulo}>Gran F1</Text>
+      <Text style= {styles.titulo}>Ir a login</Text>
 
-      <TextInput style={styles.input}
-      placeholder='Email'
-      placeholderTextColor={"#888"}
-      keyboardType='email-address'
-      value={email}
-      onChangeText={setEmail}
-      />
-      
-      <TextInput style={styles.input}
-      placeholder='Password'
-      placeholderTextColor={"#888"}
-      value={password}
-      onChangeText={setPassword}
-      />
-      {
-        error && (
-          <Text style= {styles.ErrorText}>Faltan Datos</Text>
-        )
-      }
+      <TouchableOpacity style = {styles.button} onPress={irALogin}>
+        <Text styles={styles.buttonText}>login</Text>
+      </TouchableOpacity>
 
-      <TouchableOpacity style = {styles.button} onPress={handleLogin}>
-        <Text styles={styles.buttonText}>INICIAR SESION</Text>
+      <Text style= {styles.titulo}>Ir a home</Text>
+
+    <TouchableOpacity style = {styles.button} onPress={irAHome}>
+        <Text styles={styles.buttonText}>home</Text>
       </TouchableOpacity>
 
       {/* <ListaPiloto/> */}

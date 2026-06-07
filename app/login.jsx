@@ -1,8 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { Boton } from './components/Boton';
-import { TarjetaPiloto } from './components/TarjetaPiloto';
-import { ListaPiloto } from './components/ListaPilotos';
 import { useState } from 'react';
 
 export default function App() {
