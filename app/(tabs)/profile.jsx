@@ -1,17 +1,20 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useAuth } from '../../context/AuthContext';
 
 export default function profile() {
+
+    const{user, logout} = useAuth()
   return (
         <View style={styles.container}>
             <View style={styles.cardPerfil}>
                 <View style={styles.avatar}/>
             
-                <Text style={styles.nombre}>Nombre: </Text>
+                <Text style={styles.nombre}>Nombre: {user.name}</Text>
         
-                <Text style = {styles.email}>Email</Text>
+                <Text style = {styles.email}>Email: {user.email}</Text>
 
-                <TouchableOpacity style = {styles.botonLogout}>
+                <TouchableOpacity style = {styles.botonLogout} onPress={() => logout()}>
                     <Text style = {styles.botonTexto}>cerrar sesion</Text>
                 </TouchableOpacity>
             </View>
@@ -56,7 +59,7 @@ cardPerfil: {
 
   email: {
     color: "#AAAAAA",
-    fontSize: 15,
+    fontSize: 10,
     marginBottom: 20,
   },
 

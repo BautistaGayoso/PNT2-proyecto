@@ -1,10 +1,13 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useAuth } from '../../context/AuthContext';
 
 export default function home(){
+
+    const {user} = useAuth()
   return (
     <View stytle = {styles.container}>
-        <Text style = {styles.titulo}>Hola</Text>
+        <Text style = {styles.titulo}>Hola {user.name}</Text>
         <Text style = {styles.titulo}> Bienvenido al home</Text>
 
         <TouchableOpacity style = {styles.button}>

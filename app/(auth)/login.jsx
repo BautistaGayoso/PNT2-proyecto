@@ -1,14 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useState } from 'react';
-
+import { useAuth } from '../../context/AuthContext'
 export default function App() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   
 
-
+  const {user, login, error} = useAuth()
 
   return (
     <View style={styles.container}>
@@ -35,7 +35,7 @@ export default function App() {
         )
       }
 
-      <TouchableOpacity style = {styles.button} onPress={handleLogin}>
+      <TouchableOpacity style = {styles.button} onPress={() => login(email, password)}>
         <Text styles={styles.buttonText}>INICIAR SESION</Text>
       </TouchableOpacity>
 
