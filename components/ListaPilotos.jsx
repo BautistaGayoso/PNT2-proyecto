@@ -8,8 +8,7 @@ export const ListaPiloto = () => {
 
     const llamarApi = async () => {
     try {
-        const response = await fetch("http://192.168.0.22:3000/app/drivers/drivers"
-    );
+        const response = await fetch("http://192.168.0.22:3000/app/drivers/drivers");
 
     const datosPiloto = await response.json();
     setPilotos(datosPiloto);
@@ -31,18 +30,12 @@ export const ListaPiloto = () => {
           paddingVertical: 20,
         }}
       >
-        {/* {pilotos.map((piloto) => (
+        {pilotos.map((piloto) => (
           <TarjetaPiloto
             key={piloto.driverId}
             piloto={piloto}
             // imagen={imagenesPilotos[piloto.driverId]}
-          /> */}
-        {Array.isArray(pilotos) &&
-            pilotos.map((piloto) => (
-        <TarjetaPiloto
-            key={piloto.driverId}
-            piloto={piloto}
-        />
+          />
         ))}
       </View>
     </ScrollView>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 
 export default function profile() {
@@ -9,6 +9,7 @@ export default function profile() {
         <View style={styles.container}>
             <View style={styles.cardPerfil}>
                 <View style={styles.avatar}/>
+                <Image source={{uri: `${user.profile_pic}`}}/>
             
                 <Text style={styles.nombre}>Nombre: {user.name}</Text>
         

@@ -31,7 +31,7 @@ export default function App() {
       />
       {
         error && (
-          <Text style= {styles.ErrorText}>Faltan Datos</Text>
+          <Text style= {styles.ErrorText}>{error}</Text>
         )
       }
 
@@ -39,7 +39,7 @@ export default function App() {
         <Text styles={styles.buttonText}>INICIAR SESION</Text>
       </TouchableOpacity>
 
-      {/* <ListaPiloto/> */}
+      
       
     </View>
   );

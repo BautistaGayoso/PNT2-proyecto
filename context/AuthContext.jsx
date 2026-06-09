@@ -4,12 +4,12 @@ import { createContext, useContext, useState } from "react";
 const AuthContext = createContext()
 
 
-    const MOCK_USER =[{
-        id: 1,
-        name: 'bauti',
-        email: 'bautigayoso2001@gmail.com',
-        password: '123'
-    }]
+    // const MOCK_USER =[{
+    //     id: 1,
+    //     name: 'bauti',
+    //     email: 'bautigayoso2001@gmail.com',
+    //     password: '123'
+    // }]
 
 export const useAuth = () => useContext(AuthContext)
 
@@ -20,14 +20,19 @@ export function AuthProvider({children}){
 
     const router = useRouter()
 
-    const login = (email, password) => {
-    if(!email || !password){
+    const login = async (mail, pass) => {
+    if(!mail || !pass){
         setError("faltan datos")
         return
         }
 
-        const busqueda = MOCK_USER.find((usuario) => {
-            return usuario.email === email && usuario.password === password
+
+        const response = await fetch("http://192.168.0.22:3000/app/users")
+        const dataUser = await response.json()
+
+
+        const busqueda = dataUser.message.find((usuario) => {
+            return usuario.mail === mail && usuario.pass === pass
         })
 
 
