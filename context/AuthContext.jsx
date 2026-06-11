@@ -3,14 +3,6 @@ import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext()
 
-
-    // const MOCK_USER =[{
-    //     id: 1,
-    //     name: 'bauti',
-    //     email: 'bautigayoso2001@gmail.com',
-    //     password: '123'
-    // }]
-
 export const useAuth = () => useContext(AuthContext)
 
 export function AuthProvider({children}){
@@ -21,6 +13,7 @@ export function AuthProvider({children}){
     const router = useRouter()
 
     const login = async (mail, pass) => {
+        // primera validacion 
     if(!mail || !pass){
         setError("faltan datos")
         return
@@ -30,9 +23,11 @@ export function AuthProvider({children}){
         const response = await fetch("http://192.168.0.22:3000/app/users/login", 
             {
             method: "POST",
+            // le avisa al backend que el body es json
             headers: {
                 "Content-Type": "application/json"
                 },
+            // datos enviados al backend convirtiendolos a json 
             body: JSON.stringify({
             mail,
             pass
@@ -44,14 +39,16 @@ export function AuthProvider({children}){
             
             
             
-
+            //segunda validacion, el usuario no esta logeado
         if(!data.success){
             setError(data.message)
             return
         }
 
+        //seteamos los datos que devuelve el response.json
         setUser(data.user)
         setError('')
+        //dirigimos al usuario a la vista del home
         router.replace("(tabs)/home")
         
     }
