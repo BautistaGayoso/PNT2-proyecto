@@ -12,7 +12,6 @@ export default function profile() {
                 <Image source={{uri: `${user.profile_pic}`}}/>
             
                 <Text style={styles.nombre}>Nombre: {user.name}</Text>
-        
                 <Text style = {styles.email}>Email: {user.email}</Text>
 
                 <TouchableOpacity style = {styles.botonLogout} onPress={() => logout()}>

@@ -27,23 +27,31 @@ export function AuthProvider({children}){
         }
 
 
-        const response = await fetch("http://192.168.0.22:3000/app/users")
-        const dataUser = await response.json()
+        const response = await fetch("http://192.168.0.22:3000/app/users/login", 
+            {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+                },
+            body: JSON.stringify({
+            mail,
+            pass
+                })
+            })
+            const data = await response.json()
 
+            console.log("data", data);
+            
+            
+            
 
-        const busqueda = dataUser.message.find((usuario) => {
-            return usuario.mail === mail && usuario.pass === pass
-        })
-
-
-        if (!busqueda){
-            setError("usuario o password incorrecto")
-            return   
+        if(!data.success){
+            setError(data.message)
+            return
         }
 
-        setUser(busqueda)
+        setUser(data.user)
         setError('')
-        
         router.replace("(tabs)/home")
         
     }
