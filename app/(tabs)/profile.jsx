@@ -1,18 +1,70 @@
 import React from 'react'
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
-
+import * as ImagePicker from 'expo-image-picker'
 export default function profile() {
 
-    const{user, logout} = useAuth()
+    const{user, logout, cambiarProfilePic} = useAuth()
+
+    const cambiarImagen =  () => {
+      Alert.alert("cambiarImagen", "elegi de donde queres subir la foto",
+        [{
+        text: "Camara",
+        onPress: abrirCamara 
+        },{
+          text: "galeria",
+          onPress: abrirGaleria
+
+        },{
+        text: "cancelar"
+
+      }])
+    }
+
+    const abrirCamara = async() => {
+
+      const {status} = await ImagePicker.requestCameraPermissionsAsync()
+      if(status !== "granted"){
+        Alert.alert("permiso denegado", "Necesitamos permisos para usar la camara")
+      }
+
+      const resultado = await ImagePicker.launchCameraAsync()
+
+      if(!resultado.canceled){
+        cambiarProfilePic(resultado.assets[0].uri)
+      }
+
+    }
+    const abrirGaleria = async() => {
+
+      const {status} = await ImagePicker.getMediaLibraryPermissionsAsync()
+            if(status !== "granted"){
+        Alert.alert("permiso denegado", "Necesitamos permisos para usar la galeria")
+      }
+
+      const resultado = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        mediaTypes: ImagePicker.MediaTypeOptions.Images
+      })
+
+      if(!resultado.canceled){
+      cambiarProfilePic(resultado.assets[0].uri)
+    }
+
+    }
   return (
         <View style={styles.container}>
             <View style={styles.cardPerfil}>
-                <View style={styles.avatar}/>
-                <Image source={{uri: `${user.profile_pic}`}}/>
+              <View style= {styles.avatarWrapper}>
+                <Image source={{uri: user?.profile_pic}} style={styles.avatar}/>
+                <TouchableOpacity style={styles.botonEditar} onPress={cambiarImagen}>
+                  <Text style={styles.botonTexto}>Editar</Text>
+                </TouchableOpacity>
+
+              </View>
             
-                <Text style={styles.nombre}>Nombre: {user.name}</Text>
-                <Text style = {styles.email}>Email: {user.email}</Text>
+                <Text style={styles.nombre}> {user?.name}</Text>
+                <Text style = {styles.email}>Email: {user?.mail}</Text>
 
                 <TouchableOpacity style = {styles.botonLogout} onPress={() => logout()}>
                     <Text style = {styles.botonTexto}>cerrar sesion</Text>
@@ -54,7 +106,7 @@ cardPerfil: {
     color: "#FFFFFF",
     fontSize: 26,
     fontWeight: "bold",
-    marginBottom: 5,
+    marginBottom: 20,
   },
 
   email: {
@@ -103,7 +155,7 @@ cardPerfil: {
   botonEditar: {
     backgroundColor: "#E10600",
     paddingVertical: 12,
-    paddingHorizontal: 30,
+    paddingHorizontal: 35,
     borderRadius: 10,
     marginTop: 20,
   },

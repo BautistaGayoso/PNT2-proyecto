@@ -1,14 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, Switch, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useState } from 'react';
 import { useAuth } from '../../context/AuthContext'
+
 export default function App() {
 
   const [email, setEmail] = useState('')
+  
+  const [usuario, setUsuario] = useState('')
   const [password, setPassword] = useState('')
+
+  const [esRegister, setEsRegister] = useState(false)
+  const toggleSwitch = () => setEsRegister(previousState => !previousState)
   
 
-  const {user, login, error} = useAuth()
+  const {user, login, error,loading, register} = useAuth()
+
+    if(loading){
+
+      return(
+        <ActivityIndicator size="large" color="#a10000" />
+      )
+    }
+
+    const hanldeButton = () => {
+      
+      if(esRegister){
+        register(email, password, usuario)
+      }else{
+        login(email,password)
+      }
+    }
 
   return (
     <View style={styles.container}>
@@ -18,10 +40,22 @@ export default function App() {
       <TextInput style={styles.input}
       placeholder='Email'
       placeholderTextColor={"#888"}
-      keyboardType='email-address'
       value={email}
       onChangeText={setEmail}
       />
+
+      {
+        esRegister && (
+      <TextInput style={styles.input}
+      placeholder='Usuario'
+      placeholderTextColor={"#888"}
+      keyboardType='Usuario'
+      value={usuario}
+      onChangeText={setUsuario}
+      />
+        )
+      }
+
       
       <TextInput style={styles.input}
       placeholder='Password'
@@ -35,11 +69,11 @@ export default function App() {
         )
       }
 
-      <TouchableOpacity style = {styles.button} onPress={() => login(email, password)}>
-        <Text styles={styles.buttonText}>INICIAR SESION</Text>
+      <TouchableOpacity style = {styles.button} onPress={hanldeButton}>
+        <Text styles={styles.buttonText}>{esRegister ? "REGISTRARSE" : "INICIAR SESION"}</Text>
       </TouchableOpacity>
-
       
+      <Switch value = {esRegister} onValueChange={toggleSwitch}/>
       
     </View>
   );
