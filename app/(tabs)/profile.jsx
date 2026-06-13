@@ -52,19 +52,21 @@ export default function profile() {
     }
 
     }
+
+    if(!user) return null
   return (
         <View style={styles.container}>
             <View style={styles.cardPerfil}>
               <View style= {styles.avatarWrapper}>
-                <Image source={{uri: user?.profile_pic}} style={styles.avatar}/>
+                <Image source={{uri: user.profile_pic}} style={styles.avatar}/>
                 <TouchableOpacity style={styles.botonEditar} onPress={cambiarImagen}>
                   <Text style={styles.botonTexto}>Editar</Text>
                 </TouchableOpacity>
 
               </View>
             
-                <Text style={styles.nombre}> {user?.name}</Text>
-                <Text style = {styles.email}>Email: {user?.mail}</Text>
+                <Text style={styles.nombre}> {user.name}</Text>
+                <Text style = {styles.email}>Email: {user.mail}</Text>
 
                 <TouchableOpacity style = {styles.botonLogout} onPress={() => logout()}>
                     <Text style = {styles.botonTexto}>cerrar sesion</Text>

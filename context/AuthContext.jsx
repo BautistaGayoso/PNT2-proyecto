@@ -127,8 +127,21 @@ export function AuthProvider({children}){
 
         const userModificado = {...user, profile_pic: uri}
 
-        AsyncStorage.setItem("user",JSON.stringify(userModificado))
+        await AsyncStorage.setItem("user",JSON.stringify(userModificado))
         setUser(userModificado)
+
+            const response = await fetch(`http://192.168.0.22:3000/app/users/${user.id}`, 
+            {
+            method: "PUT",
+            // le avisa al backend que el body es json
+            headers: {
+                "Content-Type": "application/json"
+                },
+            // datos enviados al backend convirtiendolos a json 
+            body: JSON.stringify({
+                profile_pic: uri
+                })
+            })
         
     }
 
