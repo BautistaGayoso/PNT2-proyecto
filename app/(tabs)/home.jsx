@@ -2,15 +2,16 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 import  {ListaPiloto}  from '../../components/ListaPilotos' 
+import  {ListaConstructores}  from '../../components/ListaConstructores'
 
 export default function home(){
-
     const {user} = useAuth()
+
   return (
     <View style = {styles.container}>
-        <Text style = {styles.titulo}>Seleccione los pilotos para su equipo</Text>
-
+        <Text style = {styles.titulo}>Proxima carrera: </Text>
         <ListaPiloto/>
+        <ListaConstructores/>
     </View>
   )
 }

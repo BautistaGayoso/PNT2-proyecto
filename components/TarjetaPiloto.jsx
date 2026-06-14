@@ -1,14 +1,7 @@
 import React from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-  ScrollView,
-} from "react-native";
+import {View,Text,Image,TouchableOpacity,StyleSheet,ScrollView} from "react-native";
 
-export const TarjetaPiloto = ({ piloto }) => {
+export const TarjetaPiloto = ({ piloto, agregarPiloto, eliminarPiloto }) => {
 
   return (
     <View style={styles.card}>
@@ -47,32 +40,35 @@ export const TarjetaPiloto = ({ piloto }) => {
       </View>
 
       <View style={styles.botones}>
-        <TouchableOpacity style={styles.botonAgregar}>
+        <TouchableOpacity style={styles.botonAgregar} onPress={() => agregarPiloto(piloto.id)}>
           <Text style={styles.textoBoton}>
             Agregar a equipo
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.botonQuitar}>
+        {/* <TouchableOpacity style={styles.botonQuitar} onPress={() => eliminarPiloto(piloto.id)}>
           <Text style={styles.textoBoton}>
             Quitar del equipo
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  card: {
-    backgroundColor: "#15151E",
-    borderWidth: 2,
-    borderColor: "#E10600",
-    borderRadius: 10,
-    padding: 20,
-    margin: 10,
-    alignItems: "center",
-  },
+card: {
+  backgroundColor: "#15151E",
+  borderWidth: 2,
+  borderColor: "#E10600",
+  borderRadius: 10,
+  padding: 20,
+  margin: 10,
+  alignItems: "center",
+
+  width: 350,
+  minHeight: 280,
+},
 
   id: {
     fontSize: 12,
@@ -81,18 +77,19 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
 
-  nombre: {
-    fontSize: 26,
-    color: "#E10600",
-    textTransform: "uppercase",
-    textAlign: "center",
-    width: "100%",
-    borderBottomWidth: 2,
-    borderBottomColor: "#E10600",
-    marginVertical: 10,
-    paddingBottom: 5,
-    fontWeight: "bold",
-  },
+nombre: {
+  fontSize: 24,
+  color: "#E10600",
+  textTransform: "uppercase",
+  textAlign: "center",
+  width: "100%",
+  height: 70, // <- importante
+  borderBottomWidth: 2,
+  borderBottomColor: "#E10600",
+  marginVertical: 10,
+  paddingBottom: 5,
+  fontWeight: "bold",
+},
 
   imagen: {
     width: 150,
@@ -130,25 +127,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  botones: {
-    flexDirection: "row",
-    gap: 10,
-    marginTop: 18,
-  },
+botones: {
+  marginTop: 18,
+  width: "100%",
+},
 
-  botonAgregar: {
-    backgroundColor: "#16a34a",
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 10,
-  },
-
-  botonQuitar: {
-    backgroundColor: "#dc2626",
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 10,
-  },
+botonAgregar: {
+  backgroundColor: "#16a34a",
+  paddingVertical: 12,
+  borderRadius: 10,
+  alignItems: "center",
+},
 
   textoBoton: {
     color: "white",

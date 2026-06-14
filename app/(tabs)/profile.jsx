@@ -2,6 +2,7 @@ import React from 'react'
 import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
 import * as ImagePicker from 'expo-image-picker'
+
 export default function profile() {
 
     const{user, logout, cambiarProfilePic} = useAuth()
