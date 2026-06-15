@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { View, ScrollView } from "react-native";
 import { TarjetaPiloto } from "./TarjetaPiloto";
 import {useAuth} from "../context/AuthContext"
+import { router } from "expo-router";
 // import { imagenesPilotos } from "../../image/imagenesPilotos";
 
 export const ListaPiloto = () => {
     const [pilotos, setPilotos] = useState([]);
     const {user} = useAuth()
 
-    const llamarApi = async () => {
+    const llamarApiPilotos = async () => {
     try {
         const response = await fetch("http://192.168.0.22:3000/app/drivers/drivers");
 
@@ -21,7 +22,7 @@ export const ListaPiloto = () => {
   };
 
   useEffect(() => {
-    llamarApi();
+    llamarApiPilotos();
   }, []);
 
 
@@ -58,6 +59,7 @@ export const ListaPiloto = () => {
           })
         }
       )
+      router.back()
       return
     }
     if(team.pilot2Id === null){
@@ -72,6 +74,7 @@ export const ListaPiloto = () => {
           })
         }
       )
+      router.back()
       return
     }
   console.log("Equipo completo");

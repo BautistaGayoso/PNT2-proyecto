@@ -1,50 +1,48 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 
-export default function TarjetaEquipo({piloto,eliminarPiloto}){
+export default function TarjetaConstructorEquipo({equipo, eliminarConstructor}) {
 
+   
     return(
-<View style={styles.card}>
-    <Text style={styles.titulo}>Piloto</Text>
+        <View style={styles.card}>
+    <Text style={styles.titulo}>
+        Constructor
+    </Text>
 
     <Text style={styles.nombre}>
-        {piloto.givenName}
-    </Text>
-
-    <Text style={styles.apellido}>
-        {piloto.familyName}
+        {equipo.name}
     </Text>
 
     <Text style={styles.info}>
-        Nacionalidad: {piloto.nationality}
+        Nacionalidad: {equipo.nationality}
     </Text>
 
     <Text style={styles.info}>
-        Puntos: {piloto.points}
+        Puntos: {equipo.points}
     </Text>
 
     <Text style={styles.info}>
-        Precio: ${piloto.price}
+        Precio: ${equipo.price}
     </Text>
 
     <TouchableOpacity
         style={styles.botonEliminar}
-        onPress={() => eliminarPiloto(piloto.id)}
+        onPress={() => eliminarConstructor(equipo.id)}
     >
         <Text style={styles.textoBoton}>
-            Quitar piloto
+            Quitar constructor
         </Text>
     </TouchableOpacity>
 </View>
     )
 }
 
-
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "#15151E",
     borderWidth: 2,
-    borderColor: "#E10600",
+    borderColor: "#FFD700",
     borderRadius: 12,
     padding: 20,
     marginVertical: 10,
@@ -53,28 +51,38 @@ const styles = StyleSheet.create({
   },
 
   titulo: {
-    color: "#E10600",
+    color: "#FFD700",
     fontSize: 22,
     fontWeight: "bold",
     marginBottom: 10,
+    textTransform: "uppercase",
   },
 
   nombre: {
     color: "white",
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: "bold",
+    textAlign: "center",
+    width: "100%",
+    borderBottomWidth: 1,
+    borderBottomColor: "#FFD700",
+    paddingBottom: 10,
+    marginBottom: 15,
   },
 
-  apellido: {
-    color: "#DDD",
-    fontSize: 18,
-    marginBottom: 15,
+  infoBox: {
+    width: "100%",
+    backgroundColor: "rgba(255,255,255,0.08)",
+    borderRadius: 10,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#444",
   },
 
   info: {
     color: "white",
     fontSize: 14,
-    marginVertical: 2,
+    marginVertical: 4,
   },
 
   botonEliminar: {
@@ -88,5 +96,6 @@ const styles = StyleSheet.create({
   textoBoton: {
     color: "white",
     fontWeight: "bold",
+    textTransform: "uppercase",
   },
 });

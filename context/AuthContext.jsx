@@ -152,8 +152,22 @@ export function AuthProvider({children}){
     }
 
 
+    const eliminarCuenta = async () => {
+
+    const response = await fetch(
+        `http://192.168.0.22:3000/app/users/${user.id}`,
+        {
+            method: "DELETE"
+        })
+        
+        const data = await response.json()
+
+        logout()
+    }
+
+
     return(
-        <AuthContext.Provider value={{user, login, register, logout, error, loading, cambiarProfilePic}}>
+        <AuthContext.Provider value={{user, login, register, logout, error, loading, cambiarProfilePic, eliminarCuenta}}>
             {children}
         </AuthContext.Provider>
     )

@@ -5,10 +5,10 @@ import * as ImagePicker from 'expo-image-picker'
 
 export default function profile() {
 
-    const{user, logout, cambiarProfilePic} = useAuth()
+    const{user, logout, cambiarProfilePic, eliminarCuenta} = useAuth()
 
     const cambiarImagen =  () => {
-      Alert.alert("cambiarImagen", "elegi de donde queres subir la foto",
+      Alert.alert("Cambiar imagen", "elegi de donde queres subir la foto",
         [{
         text: "Camara",
         onPress: abrirCamara 
@@ -57,66 +57,100 @@ export default function profile() {
     if(!user) return null
   return (
         <View style={styles.container}>
+          <Text style={styles.titulo}>Mi perfil</Text>  
+          <Text style={styles.subtitulo}>Información de usuario</Text>
+
+          <View style={styles.linea} />
+
             <View style={styles.cardPerfil}>
               <View style= {styles.avatarWrapper}>
                 <Image source={{uri: user.profile_pic}} style={styles.avatar}/>
                 <TouchableOpacity style={styles.botonEditar} onPress={cambiarImagen}>
-                  <Text style={styles.botonTexto}>Editar</Text>
+                  <Text style={styles.botonTexto}>Editar foto</Text>
                 </TouchableOpacity>
-
               </View>
-            
                 <Text style={styles.nombre}> {user.name}</Text>
                 <Text style = {styles.email}>Email: {user.mail}</Text>
-
                 <TouchableOpacity style = {styles.botonLogout} onPress={() => logout()}>
                     <Text style = {styles.botonTexto}>cerrar sesion</Text>
                 </TouchableOpacity>
             </View>
+          <TouchableOpacity style = {styles.botonLogout} onPress={() => eliminarCuenta()}>
+            <Text style = {styles.botonTexto}>Eliminar cuenta</Text>
+          </TouchableOpacity>
         </View>
   )
 }
 
 const styles = StyleSheet.create({
 container: {
-    flex: 1,
-    backgroundColor: "#3b3838",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
+  flex: 1,
+  backgroundColor: "#1A1A1A",
+  paddingTop: 30,
+},
+
+titulo: {
+  color: "#FFFFFF",
+  fontSize: 30,
+  fontWeight: "bold",
+  marginBottom: 5,
+  marginLeft: 20,
+},
+
+subtitulo: {
+  color: "#AAAAAA",
+  fontSize: 16,
+  marginLeft: 20,
+  marginBottom: 20,
+},
+
+linea: {
+  height: 3,
+  backgroundColor: "#E10600",
+  width: "90%",
+  alignSelf: "center",
+  marginBottom: 20,
+  borderRadius: 10,
 },
 
 cardPerfil: {
-    backgroundColor: "#15151E",
-    borderWidth: 2,
-    borderColor: "#E10600",
-    borderRadius: 15,
-    padding: 100,
-    width: "100%",
-    alignItems: "center",
+  backgroundColor: "#15151E",
+  borderWidth: 2,
+  borderColor: "#E10600",
+  borderRadius: 12,
+  padding: 20,
+  width: "90%",
+  alignSelf: "center",
+  alignItems: "center",
+  marginTop: 10,
 },
 
-  avatar: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
-    borderWidth: 3,
-    borderColor: "#E10600",
-    marginBottom: 15,
-  },
+avatar: {
+  width: 120,
+  height: 120,
+  borderRadius: 60,
+  borderWidth: 3,
+  borderColor: "#E10600",
+  marginBottom: 10,
+},
+avatarWrapper: {
+    width: "100%",
+    alignItems: "center",
+    marginBottom: 20,
+},
 
   nombre: {
     color: "#FFFFFF",
     fontSize: 26,
     fontWeight: "bold",
-    marginBottom: 20,
+    marginBottom: 8,
   },
 
-  email: {
-    color: "#AAAAAA",
-    fontSize: 10,
-    marginBottom: 20,
-  },
+email: {
+  color: "#AAAAAA",
+  fontSize: 15,
+  marginBottom: 25,
+},
 
   separador: {
     width: "100%",
@@ -155,27 +189,28 @@ cardPerfil: {
     fontWeight: "600",
   },
 
-  botonEditar: {
-    backgroundColor: "#E10600",
-    paddingVertical: 12,
-    paddingHorizontal: 35,
-    borderRadius: 10,
-    marginTop: 20,
-  },
+botonEditar: {
+  backgroundColor: "#2563EB",
+  paddingVertical: 12,
+  paddingHorizontal: 35,
+  borderRadius: 10,
+  marginTop: 5,
+  marginBottom: 20,
+},
 
   botonTexto: {
     color: "#FFFFFF",
     fontWeight: "bold",
     fontSize: 16,
   },
-  botonLogout: {
+botonLogout: {
   backgroundColor: "#2A2A2A",
   borderWidth: 2,
   borderColor: "#E10600",
   paddingVertical: 12,
   paddingHorizontal: 30,
   borderRadius: 10,
-  marginTop: 12,
+  marginTop: 15,
   width: "100%",
   alignItems: "center",
 },
