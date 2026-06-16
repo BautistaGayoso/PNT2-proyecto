@@ -5,7 +5,7 @@ import * as ImagePicker from 'expo-image-picker'
 
 export default function profile() {
 
-    const{user, logout, cambiarProfilePic, eliminarCuenta} = useAuth()
+    const{user, logout, cambiarProfilePic, confirmarEliminarCuenta} = useAuth()
 
     const cambiarImagen =  () => {
       Alert.alert("Cambiar imagen", "elegi de donde queres subir la foto",
@@ -75,8 +75,8 @@ export default function profile() {
                     <Text style = {styles.botonTexto}>cerrar sesion</Text>
                 </TouchableOpacity>
             </View>
-          <TouchableOpacity style = {styles.botonLogout} onPress={() => eliminarCuenta()}>
-            <Text style = {styles.botonTexto}>Eliminar cuenta</Text>
+          <TouchableOpacity style = {styles.botonEliminarCuenta} onPress={() => confirmarEliminarCuenta()}>
+            <Text style = {styles.textoEliminarCuenta}>Eliminar cuenta</Text>
           </TouchableOpacity>
         </View>
   )
@@ -217,6 +217,24 @@ botonLogout: {
 
 textoLogout: {
   color: "#E10600",
+  fontWeight: "bold",
+  fontSize: 16,
+  textTransform: "uppercase",
+},
+botonEliminarCuenta: {
+  backgroundColor: "#7F1D1D",
+  borderWidth: 2,
+  borderColor: "#DC2626",
+  paddingVertical: 12,
+  paddingHorizontal: 30,
+  borderRadius: 10,
+  marginTop: 12,
+  width: "100%",
+  alignItems: "center",
+},
+
+textoEliminarCuenta: {
+  color: "#FFFFFF",
   fontWeight: "bold",
   fontSize: 16,
   textTransform: "uppercase",

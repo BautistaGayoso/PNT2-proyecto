@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { createContext, useContext, useEffect, useState } from "react";
+import { Alert } from "react-native";
 
 const AuthContext = createContext()
 
@@ -151,6 +152,18 @@ export function AuthProvider({children}){
         router.replace("/(auth)/login")
     }
 
+    const confirmarEliminarCuenta = () => {
+
+    Alert.alert("¿Estás seguro de que deseas eliminar tu cuenta?","Esta acción no se puede deshacer.",[
+            {
+                text: "Eliminar",
+                onPress:() => eliminarCuenta()
+            },{
+                text: "Cancelar",
+            }
+        ]
+    )
+}
 
     const eliminarCuenta = async () => {
 
@@ -167,7 +180,7 @@ export function AuthProvider({children}){
 
 
     return(
-        <AuthContext.Provider value={{user, login, register, logout, error, loading, cambiarProfilePic, eliminarCuenta}}>
+        <AuthContext.Provider value={{user, login, register, logout, error, loading, cambiarProfilePic, confirmarEliminarCuenta}}>
             {children}
         </AuthContext.Provider>
     )

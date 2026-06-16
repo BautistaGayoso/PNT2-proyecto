@@ -47,9 +47,6 @@ const agregarConstructor = async (constructorId) => {
 
     const team = await buscarTeam();
 
-    console.log("TEAM:", team);
-    
-
     if(team.constructorId === constructorId){
     console.log("constructor ya agregado");
     return;
@@ -69,31 +66,6 @@ const agregarConstructor = async (constructorId) => {
     router.back()
     return
 }
-
-// const eliminarConstructor = async (constructorId) => {
-
-//     const team = await buscarTeam();
-
-//     if(team.constructorId === constructorId){
-
-//     await fetch(
-//         `http://192.168.0.22:3000/app/team/${user.id}`,
-//         {
-//         method: "PUT",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({
-//             constructorId: null
-//         })
-//         }
-//     );
-
-//     return;
-//     }
-
-//     console.log("constructor no encontrado");
-// }
 
 return (
     <ScrollView>

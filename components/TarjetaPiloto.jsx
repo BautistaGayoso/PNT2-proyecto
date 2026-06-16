@@ -37,6 +37,9 @@ export const TarjetaPiloto = ({ piloto, agregarPiloto, eliminarPiloto }) => {
           <Text style={styles.bold}>Nacionalidad:</Text>{" "}
           {piloto.nationality}
         </Text>
+        <Text style={styles.info}>
+            Precio: ${piloto.price}
+        </Text>
       </View>
 
       <View style={styles.botones}>

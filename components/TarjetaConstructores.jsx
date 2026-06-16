@@ -24,6 +24,9 @@ export const TarjetaConstructor = ({constructor,agregarConstructor}) => {
           </Text>{" "}
           {constructor.nationality}
         </Text>
+        <Text style={styles.info}>
+            Precio: ${constructor.price}
+        </Text>
 
       </View>
 

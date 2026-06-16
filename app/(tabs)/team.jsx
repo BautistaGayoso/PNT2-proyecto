@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from 'react'
 import { useFocusEffect } from "@react-navigation/native";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useAuth } from '../../context/AuthContext';
-import  {ListaPiloto}  from '../../components/ListaPilotos'
 import  TarjetaPilotoEquipo  from '../../components/TarjetaPilotoEquipo'
 import  TarjetaConstructorEquipo  from '../../components/TarjetaConstructorEquipo'
 
@@ -104,7 +103,11 @@ const elegirConstructor = () => {
 
 return(
     <View style={styles.container}>
-        <Text style={styles.titulo}>Tu equipo</Text>
+        <View style={styles.tituloContainer}>
+            <Text style={styles.titulo}>Tu equipo</Text>
+
+            <Text style={styles.presupuesto}>Presupuesto: {team?.budget}</Text>
+        </View>
         <Text style={styles.subtitulo}>Gestiona tus pilotos y constructor</Text>
         
         <View style={styles.botonesContainer}>
@@ -244,5 +247,18 @@ textoBoton: {
     fontWeight: "bold",
     fontSize: 18,
     textTransform: "uppercase",
+},
+tituloContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    paddingHorizontal: 20,
+},
+
+presupuesto: {
+    color: "#ffffff",
+    fontSize: 18,
+    fontWeight: "600",
 },
 });
